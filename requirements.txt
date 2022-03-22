@@ -1,0 +1,4 @@
+aiogram==2.19
+google-api-python-client==2.40.0
+httplib2==0.20.4
+oauth2client==4.1.3
