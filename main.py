@@ -26,7 +26,6 @@ async def get_url(message: types.Message, state: FSMContext):
         get_sheet_id(message.text)
         get_sheet_name(bot_var.spreadsheet_id, bot_var.sheet_id)
         await message.reply("Бот запущен на обработку опозданий")
-        await bot.send_message(192363594, f'Bot started by {message.from_user.username}')
         await state.finish()
     except:
         await message.answer("Отправьте ссылку на таблицу опозданий")
@@ -38,13 +37,12 @@ async def stop(message: types.Message):
         await message.answer("Бот не был запущен")
     else:
         bot_var.reset_var()
-        await bot.send_message(192363594, f'Bot stopped by {message.from_user.username}')
         await message.answer("Бот остановлен")
 
 
 @dp.message_handler(IsSet(), IsGroup(), regexp=key_words_regexp)
 async def grabbing(message: types.Message):
-    await writing(message.text, searching_empty_cell())
+    writing(message.text, searching_empty_cell())
     await message.reply('+')
 
 
