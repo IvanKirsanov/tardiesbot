@@ -29,9 +29,9 @@ def get_sheet_id(url_from_user):
     """Функция для вычленения из полученной от администратора ссылки id таблицы и id листа."""
     start = url_from_user.find('/d/')
     end = url_from_user.find('/edit')
-    start1 = url_from_user.find('gid=')
     bot_var.set_spreadsheet_id(url_from_user[start + 3:end])
-    bot_var.set_sheet_id(url_from_user[start1 + 4:])
+    start = url_from_user.find('gid=')
+    bot_var.set_sheet_id(url_from_user[start + 4:])
 
 
 def searching_empty_cell():
