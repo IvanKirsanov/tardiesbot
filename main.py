@@ -8,7 +8,7 @@ from data import TOKEN
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(filename='app.log', format='%(asctime)s - %(message)s', level=logging.INFO)
 
 
 @dp.message_handler(IsAdmin(), commands="start")
@@ -26,6 +26,7 @@ async def get_url(message: types.Message, state: FSMContext):
         get_sheet_id(message.text)
         get_sheet_name(bot_var.spreadsheet_id, bot_var.sheet_id)
         await message.reply("Бот запущен на обработку опозданий")
+        logging.info(f'Bot started by {message.from_user.username}')
         await state.finish()
     except:
         await message.answer("Отправьте ссылку на таблицу опозданий")
@@ -36,6 +37,7 @@ async def stop(message: types.Message):
     if bot_var.spreadsheet_id == '':
         await message.answer("Бот не был запущен")
     else:
+        logging.info(f'Bot stopped by {message.from_user.username}.')
         bot_var.reset_var()
         await message.answer("Бот остановлен")
 
