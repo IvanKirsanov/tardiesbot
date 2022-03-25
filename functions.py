@@ -21,7 +21,7 @@ def empty_check(res):
     try:
         if values['values'] != '':
             return True
-    except:
+    except KeyError:
         return False
 
 

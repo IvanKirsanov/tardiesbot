@@ -1,6 +1,7 @@
 from filters import *
 from functions import *
 import logging
+import googleapiclient.errors
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.dispatcher import FSMContext
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
@@ -28,7 +29,7 @@ async def get_url(message: types.Message, state: FSMContext):
         await message.reply("Бот запущен на обработку опозданий")
         logging.info(f'Bot started by {message.from_user.username}')
         await state.finish()
-    except:
+    except (googleapiclient.errors.HttpError, ValueError):
         await message.answer("Отправьте ссылку на таблицу опозданий")
 
 
